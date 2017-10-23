@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ site }}</p>
+        <p>{{name}}</p>
+        <p>{{url}}</p>
+    </div>
+</body>
+
+<script type="text/javascript">
+var vm = new Vue({
+    el: '#app',
+    data: {
+        name: 'Google',
+        url: 'http://www.google.com'
+    },
+    computed: {
+        site: {
+            // getter
+            get: function() {
+                return this.name + ' ' + this.url
+            },
+            // setter
+            set: function(newValue) {
+                var names = newValue.split(' ')
+                this.name = names[0]
+                this.url = names[names.length - 1]
+            }
+        }
+    }
+})
+
+// 调用 setter， vm.name 和 vm.url 也会被对应更新
+vm.site = '菜鸟教程 http://www.runoob.com';
+
+console.log(vm.name);
+console.log(vm.url);
+</script>
+
+</html>
